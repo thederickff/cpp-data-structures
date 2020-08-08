@@ -14,6 +14,8 @@ public:
 
   ~ChernoVector()
   {
+    // Clear();
+    // ::operator delete(m_Data, m_Capacity * sizeof(T));
     delete[] m_Data;
   }
 
@@ -75,7 +77,8 @@ private:
   void ReAlloc(size_t newCapacity)
   {
     std::cout << "Growing from " << m_Capacity << " to " << newCapacity << std::endl;
-    T* newBlock = new T[newCapacity];
+    // T* newBlock = (T*)::operator new(newCapacity * sizeof(T));
+    T* newBlock =  new T[newCapacity];
 
     if (newCapacity < m_Size) {
       m_Size = newCapacity;
@@ -85,6 +88,11 @@ private:
       newBlock[i] = std::move(m_Data[i]);
     }
 
+    for (size_t i = 0; i < m_Size; ++i) {
+      m_Data[i].~T();
+    }
+
+    // ::operator delete(m_Data, m_Capacity * sizeof(T));
     delete[] m_Data;
     
     m_Data = newBlock;
