@@ -82,29 +82,48 @@ void MyVectorTest()
 
 void ChernoVectorTest()
 {
-  std::cout << "\nChernoVector: std::string" << std::endl;
-  ChernoVector<std::string> vector;
-  vector.PushBack("Cherno");
-  vector.PushBack("C++");
-  vector.PushBack("Vector");
+  {
+    std::cout << "\nChernoVector: std::string" << std::endl;
+    ChernoVector<std::string> vector;
+    vector.PushBack("Cherno");
+    vector.PushBack("C++");
+    vector.PushBack("Vector");
 
-  for (size_t i = 0; i < vector.Size(); ++i) {
-    std::cout << vector[i] << std::endl;
+    for (size_t i = 0; i < vector.Size(); ++i) {
+      std::cout << vector[i] << std::endl;
+    }
+  
+    std::cout << "----------------------" << std::endl;
   }
 
-  std::cout << "----------------------" << std::endl;
-  std::cout << "\nChernoVector: Vector3" << std::endl;
-  ChernoVector<Vector3> vector3s;
-  // vector3s.PushBack(Vector3(30.0f));
-  // vector3s.PushBack(Vector3(1.0, 1.5, 0.5));
-  // vector3s.PushBack(Vector3());
+  {
+    std::cout << "\nChernoVector: Vector3" << std::endl;
+    ChernoVector<Vector3> vector3s;
+    // vector3s.PushBack(Vector3(30.0f));
+    // vector3s.PushBack(Vector3(1.0, 1.5, 0.5));
+    // vector3s.PushBack(Vector3());
 
-  vector3s.EmplaceBack(30.0f);
-  vector3s.EmplaceBack(1.0, 1.5, 0.5);
-  vector3s.EmplaceBack();
+    vector3s.EmplaceBack(30.0f);
+    vector3s.EmplaceBack(1.0, 1.5, 0.5);
+    vector3s.EmplaceBack();
 
-  for (size_t i = 0; i < vector3s.Size(); ++i) {
-    std::cout << "{ " << vector3s[i].x << ", " << vector3s[i].y << ", " << vector3s[i].z << " }" << std::endl;
+    for (size_t i = 0; i < vector3s.Size(); ++i) {
+      std::cout << "{ " << vector3s[i].x << ", " << vector3s[i].y << ", " << vector3s[i].z << " }" << std::endl;
+    }
+    vector3s.PopBack();
+    vector3s.PopBack();
+
+    for (size_t i = 0; i < vector3s.Size(); ++i) {
+      std::cout << "{ " << vector3s[i].x << ", " << vector3s[i].y << ", " << vector3s[i].z << " }" << std::endl;
+    }
+
+    vector3s.Clear();
+
+    for (size_t i = 0; i < vector3s.Size(); ++i) {
+      std::cout << "{ " << vector3s[i].x << ", " << vector3s[i].y << ", " << vector3s[i].z << " }" << std::endl;
+    }
+
+    std::cout << "----------------------" << std::endl;
   }
 }
 

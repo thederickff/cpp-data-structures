@@ -44,8 +44,25 @@ public:
       ReAlloc(m_Capacity * 1.5);
     }
 
-    m_Data[m_Size] = T(std::forward<Args>(args)...);
-    m_Size++;
+    new(&m_Data[m_Size]) T(std::forward<Args>(args)...);
+    return m_Data[m_Size++];
+  }
+
+  void PopBack()
+  {
+    if (m_Size > 0) {
+      m_Size--;
+      m_Data[m_Size].~T();
+    }
+  }
+
+  void Clear()
+  {
+    for (size_t i = 0; i < m_Size; ++i) {
+      m_Data[i].~T();
+    }
+
+    m_Size = 0;
   }
 
   constexpr size_t Size() const { return m_Size; }
@@ -57,6 +74,7 @@ public:
 private:
   void ReAlloc(size_t newCapacity)
   {
+    std::cout << "Growing from " << m_Capacity << " to " << newCapacity << std::endl;
     T* newBlock = new T[newCapacity];
 
     if (newCapacity < m_Size) {
@@ -69,7 +87,6 @@ private:
 
     delete[] m_Data;
     
-    std::cout << "Growing from " << m_Capacity << " to " << newCapacity << std::endl;
     m_Data = newBlock;
     m_Capacity = newCapacity;
   }
