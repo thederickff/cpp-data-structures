@@ -15,8 +15,8 @@ public:
   ~ChernoVector()
   {
     // Clear();
-    // ::operator delete(m_Data, m_Capacity * sizeof(T));
-    delete[] m_Data;
+    operator delete(m_Data);
+    // delete[] m_Data;
   }
 
   void PushBack(const T &value)
