@@ -2,13 +2,13 @@
 
 #include "MyVector.h"
 
-int main()
+void MyVectorTest()
 {
   std::cout << "MyVector: int" << std::endl;
 
   MyVector<int> myVectorInt;
 
-  for (int i = 0; i < 1000; ++i) {
+  for (int i = 0; i < 100; ++i) {
     myVectorInt.PushBack(i);
   }
 
@@ -27,6 +27,11 @@ int main()
   for (int i = 0; i < myVectorString.Size(); i++) {
     std::cout << myVectorString[i] << std::endl;
   }
+}
+
+int main()
+{
+  MyVectorTest();
 
   return 0;
 }
